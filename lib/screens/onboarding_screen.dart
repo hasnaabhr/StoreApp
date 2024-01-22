@@ -26,28 +26,24 @@ class OnBoardingScreen extends StatelessWidget {
         PageViewModel(
           title: 'Shop now',
           body: 'Welcome to Tokoto, Let’s shop!',
-          image: Image.asset(
-            'images/splash_1.png',
-            width: 200,
-          ),
+          image: Image.asset('images/splash_1.png', width: 200, height: 200),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: 'Big discount',
           body:
               'We help people conect with store \naround United State of America',
-          image: Image.asset(
-            'images/splash_2.png',
-            width: 200,
-          ),
+          image: Image.asset('images/splash_2.png', width: 200, height: 200),
           decoration: pageDecoration,
         ),
         PageViewModel(
             title: 'Free Delivery',
             body: 'We show the easy way to shop. \nJust stay at home with us',
-            image: Image.asset(
-              'images/splash_3.png',
-              width: 300,
+            image: Center(
+              child: Image.asset(
+                'images/splash_3.png',
+                width: 200,
+              ),
             ),
             decoration: pageDecoration,
             footer: Padding(
@@ -72,6 +68,7 @@ class OnBoardingScreen extends StatelessWidget {
                   'continue',
                   style: TextStyle(
                     fontSize: 18,
+                    color: Colors.white,
                   ),
                 ),
               ),

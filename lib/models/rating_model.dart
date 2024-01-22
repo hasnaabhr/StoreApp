@@ -1,12 +1,10 @@
 class RatingModel {
-  final int count;
   final dynamic rate;
+  final int count;
 
-  RatingModel({required this.count, required this.rate});
+  RatingModel({required this.rate, required this.count});
+
   factory RatingModel.fromJson(jsonData) {
-    return RatingModel(
-      count: jsonData['count'],
-      rate: jsonData['rate'],
-    );
+    return RatingModel(rate: jsonData['rate'], count: jsonData['count']);
   }
 }

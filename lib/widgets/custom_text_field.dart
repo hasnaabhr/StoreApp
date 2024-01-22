@@ -14,19 +14,22 @@ class CustomTextField extends StatelessWidget {
   bool? obscureText;
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      obscureText: obscureText!,
-      onChanged: onChanged,
-      keyboardType: inputType,
-      decoration: InputDecoration(
-        hintText: hintText,
-        enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        border: OutlineInputBorder(
-          borderSide: const BorderSide(),
-          borderRadius: BorderRadius.circular(8),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TextField(
+        obscureText: obscureText!,
+        onChanged: onChanged,
+        keyboardType: inputType,
+        decoration: InputDecoration(
+          hintText: hintText,
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          border: OutlineInputBorder(
+            borderSide: const BorderSide(),
+            borderRadius: BorderRadius.circular(8),
+          ),
         ),
       ),
     );

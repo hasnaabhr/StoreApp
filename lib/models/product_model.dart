@@ -1,23 +1,24 @@
 import 'package:storeapp/models/rating_model.dart';
 
-class ProductModdel {
+class ProductModel {
   final dynamic id;
-  final String title;
-  final double price;
-  final String category;
+  final dynamic title;
+  final dynamic price;
   final String description;
   final String image;
   final RatingModel? rating;
-  ProductModdel(
+  final String category;
+  ProductModel(
       {required this.id,
       required this.title,
+      required this.category,
       required this.price,
       required this.description,
       required this.image,
-      required this.rating,
-      required this.category});
-  factory ProductModdel.fromJson(jsonData) {
-    return ProductModdel(
+      required this.rating});
+
+  factory ProductModel.fromJson(jsonData) {
+    return ProductModel(
         id: jsonData['id'],
         title: jsonData['title'],
         category: jsonData['category'],

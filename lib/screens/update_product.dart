@@ -1,106 +1,109 @@
 import 'package:flutter/material.dart';
+
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:storeapp/models/product_model.dart';
+import 'package:storeapp/screens/home_page.dart';
+import 'package:storeapp/services/update_product.dart';
 import 'package:storeapp/widgets/custom_text_field.dart';
 import 'package:storeapp/widgets/custome_button.dart';
-import 'package:storeapp/services/update_product.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
-class UpdateProduct extends StatefulWidget {
+class UpdateProductPage extends StatefulWidget {
+  const UpdateProductPage({super.key});
+
   static String id = 'update product';
 
-  const UpdateProduct({super.key});
-
   @override
-  State<UpdateProduct> createState() => _UpdateProductState();
+  State<UpdateProductPage> createState() => _UpdateProductPageState();
 }
 
-class _UpdateProductState extends State<UpdateProduct> {
-  String? productName;
-
-  String? description;
-
-  String? image;
+class _UpdateProductPageState extends State<UpdateProductPage> {
+  String? productname, desc, image;
 
   String? price;
+
   bool isloading = false;
+
   @override
   Widget build(BuildContext context) {
-    ProductModdel product =
-        ModalRoute.of(context)!.settings.arguments as ProductModdel;
+    ProductModel product =
+        ModalRoute.of(context)!.settings.arguments as ProductModel;
     return ModalProgressHUD(
       inAsyncCall: isloading,
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
-            'update Product',
-            style: TextStyle(color: Colors.black),
+            "Update product",
+            style: TextStyle(fontSize: 20, color: Colors.white),
           ),
-          backgroundColor: Colors.transparent,
+          backgroundColor: const Color(0xFFED7646),
           elevation: 0,
           centerTitle: true,
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(16),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  height: 100,
-                ),
-                CustomTextField(
-                  onChanged: (data) {
-                    productName = data;
-                  },
-                  hintText: 'Product Name',
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                CustomTextField(
-                  onChanged: (data) {
-                    description = data;
-                  },
-                  hintText: 'Description',
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                CustomTextField(
-                  onChanged: (data) {
-                    price = data;
-                  },
-                  hintText: 'Price',
-                  inputType: TextInputType.number,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                CustomTextField(
-                  onChanged: (data) {
-                    image = data;
-                  },
-                  hintText: 'Image',
-                ),
-                const SizedBox(
-                  height: 70,
-                ),
-                CustomButton(
-                  title: 'Update',
-                  onTap: () async {
-                    isloading = true;
-                    setState(() {});
-                    try {
-                      await updateProduct(product);
-                      print('success');
-                    } catch (e) {
-                      print(e.toString());
-                    }
-                    isloading = false;
-                    setState(() {});
-                  },
-                )
-              ],
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomTextField(
+                    hintText: 'product name',
+                    onChanged: (data) {
+                      productname = data;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  CustomTextField(
+                    hintText: 'description',
+                    onChanged: (data) {
+                      desc = data;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  CustomTextField(
+                    inputType: TextInputType.number,
+                    hintText: 'price',
+                    onChanged: (data) {
+                      price = data;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  CustomTextField(
+                    hintText: 'image',
+                    onChanged: (data) {
+                      image = data;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  CustomButon(
+                    text: 'Update',
+                    onTap: () async {
+                      isloading = true;
+                      setState(() {});
+
+                      try {
+                        await updateproduct(product);
+                        print('success');
+                        setState(() {
+                          Navigator.pushNamed(context, HomePage.id);
+                        });
+                      } catch (e) {
+                        print(e.toString());
+                      }
+                      isloading = false;
+                      setState(() {});
+                    },
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -108,12 +111,12 @@ class _UpdateProductState extends State<UpdateProduct> {
     );
   }
 
-  Future<void> updateProduct(ProductModdel product) async {
-    await UpdateProductService().updateProduct(
+  Future<void> updateproduct(ProductModel product) async {
+    await UpdateProduct().updateProduct(
         id: product.id,
-        title: productName == null ? product.title : productName!,
+        title: productname == null ? product.title : productname!,
         price: price == null ? product.price.toString() : price!,
-        desc: description == null ? product.description : description!,
+        desc: desc == null ? product.description : desc!,
         image: image == null ? product.image : image!,
         category: product.category);
   }

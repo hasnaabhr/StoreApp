@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'package:storeapp/models/product_model.dart';
-import 'package:storeapp/screens/update_product.dart';
 
 // ignore: must_be_immutable
-class CustomCard extends StatelessWidget {
-  CustomCard({
-    required this.product,
+class Customcatettegory extends StatelessWidget {
+  Customcatettegory({
+    required this.category,
     Key? key,
   }) : super(key: key);
-  ProductModel product;
+  ProductModel category;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, UpdateProductPage.id, arguments: product);
-      },
       child: Stack(
         clipBehavior: Clip.none,
         children: [
@@ -36,14 +32,14 @@ class CustomCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(product.title.substring(0, 6)),
+                    Text(category.title.substring(0, 6)),
                     const SizedBox(
                       height: 15,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(r'$' '${product.price.toString()}'),
+                        Text(r'$' '${category.price.toString()}'),
                         const Icon(
                           Icons.favorite,
                           color: Colors.red,
@@ -59,7 +55,7 @@ class CustomCard extends StatelessWidget {
               right: 20,
               bottom: 75,
               child: Image.network(
-                product.image,
+                category.image,
                 height: 100,
                 width: 100,
               ))

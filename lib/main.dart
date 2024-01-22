@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:storeapp/screens/categories_page.dart';
 import 'package:storeapp/screens/home_page.dart';
 import 'package:storeapp/screens/onboarding_screen.dart';
 import 'package:storeapp/screens/update_product.dart';
@@ -16,10 +17,12 @@ class StoreApp extends StatelessWidget {
       routes: {
         OnBoardingScreen.id: (context) => OnBoardingScreen(),
         HomePage.id: (context) => const HomePage(),
-        UpdateProduct.id: (context) => const UpdateProduct(),
+        CategoriesPage.id: (context) => CategoriesPage(),
+        UpdateProductPage.id: (context) => const UpdateProductPage(),
       },
       debugShowCheckedModeBanner: false,
       initialRoute: OnBoardingScreen.id,
+      home: OnBoardingScreen(),
     );
   }
 }
